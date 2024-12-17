@@ -17,7 +17,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname();
 
   return (
-    <section className="h-full max-w-[264px]">
+    <section className="h-full max-w-[264px] text-black-1">
       <Sheet>
         <SheetTrigger>
           <Image
@@ -40,35 +40,44 @@ const MobileNav = ({ user }: MobileNavProps) => {
           </Link>
           <div className="mobilenav-sheet">
             <SheetClose asChild>
-              <nav className="flex h-full flex-col gap-6 pt-16 text-white">
+              <nav className="flex h-full flex-col gap-6 pt-16 text-black">
                 {sidebarLinks.map((item) => {
                   const isActive =
                     pathname === item.route ||
                     pathname.startsWith(`${item.route}/`);
                   return (
-                    <Link
-                      key={item.label}
-                      href={item.route}
-                      className={cn("sidebar-link", {
-                        "bg-bank-gradient": isActive,
-                      })}
-                    >
-                      <div className="relative size-6 ">
+                    <SheetClose asChild key={item.route}>
+                      <Link
+                        key={item.label}
+                        href={item.route}
+                        className={cn("mobilenav-sheet_close w-full", {
+                          "bg-bank-gradient": isActive,
+                        })}
+                      >
                         <Image
                           src={item.imgURL}
                           alt={item.label}
-                          fill
+                          width={20}
+                          height={20}
                           className={cn({
                             "brightness-[3] invert-0": isActive,
                           })}
                         />
-                      </div>
-                      {item.label}
-                    </Link>
+                        <p
+                          className={cn("text-16 font-semibold text-black-2", {
+                            "!text-white": isActive,
+                          })}
+                        >
+                          {item.label}
+                        </p>
+                      </Link>
+                    </SheetClose>
                   );
                 })}
+                USER
               </nav>
             </SheetClose>
+            FOOTER
           </div>
         </SheetContent>
       </Sheet>
