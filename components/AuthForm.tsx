@@ -11,7 +11,6 @@ import { Form } from "@/components/ui/form";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import SignUp from "@/app/(auth)/sign-up/page";
 import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/actions/user.action";
 

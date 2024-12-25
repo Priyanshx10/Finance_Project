@@ -18,7 +18,7 @@ export const signUp = async (userData: SignUpParams) => {
   try {
     const { account } = await createAdminClient();
 
-    await account.create(
+    const newUserAccount = await account.create(
       ID.unique(),
       email,
       password,
@@ -32,7 +32,7 @@ export const signUp = async (userData: SignUpParams) => {
       sameSite: "strict",
       secure: true,
     });
-    return parseStringify(newUser);
+    return parseStringify(newUserAccount);
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +41,8 @@ export const signUp = async (userData: SignUpParams) => {
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
-    return await account.get();
+    const user = await account.get();
+    return parseStringify(user);
   } catch (error) {
     return null;
   }
