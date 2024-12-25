@@ -5,9 +5,11 @@ import { createSessionClient, createAdminClient } from "../server/appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
-export const signIn = async () => {
+export const signIn = async ({ email, password }: signInProps) => {
   try {
-    //Mutuations / Database / Make a fetch
+    const { account } = await createSessionClient();
+    const response = await account.createEmailPasswordSession(email, password);
+    return parseStringify(response);
   } catch (error) {
     console.log(error);
   }
